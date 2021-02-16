@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Montserrat Light';
+    src: url('./../../assets/Montserrat-Light.ttf') format('truetype');
+}
+
+.Header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    justify-content: space-between;
+    margin: 0 20px;
+
+    * {
+        color: #FFFFFF;
+        font-family: 'Montserrat Light', sans-serif;
+        font-weight: 100;
+    }
+    
+    .title {
+        display: flex;
+        align-items: center;
+        height: 50px;
+
+        img {
+            height: 30px;
+            display: inline;
+        }
+
+        h2 {
+            margin-left: 10px;
+            display: inline;
+            
+            line-height: 30px;
+            font-size: 18px;
+            color: #FFFFFF;
+        }
+    }
+
+    p {
+        cursor: pointer;
+        font-size: 14px;
+    }
+}

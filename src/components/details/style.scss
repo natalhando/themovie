@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Montserrat Light';
+    src: url('./../../assets/Montserrat-Light.ttf') format('truetype');
+}
+
+.Details {
+    width: 30vw;
+    height: 35vh;
+
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset -2px -2px 2px rgba(48, 41, 47, 0.25), inset 2px 2px 2px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+
+    .card-body {
+        display: flex;
+        padding: 0 10px;
+
+        .card-content {
+            margin-left: 10px;
+
+            h3, p {
+                font-family: 'Montserrat Light', sans-serif;
+                font-weight: 100;
+                color: #FFFFFF;
+            }
+
+            h3 { font-size: 14px }
+            p { font-size: 12px }
+
+        }
+
+        img {
+            height: 25vh;
+        }
+
+    }
+}
