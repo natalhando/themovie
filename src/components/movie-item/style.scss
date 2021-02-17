@@ -5,7 +5,8 @@
 
 .MovieItem {
     cursor: pointer;
-    background: #3F4045;
+    background: rgba(63, 64, 69, 0.5);
+    border-bottom: 2px solid rgb(40, 41, 44);
     height: 80px;
     padding: 5px;
     display: flex;
@@ -49,7 +50,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 300px;
+            width: 380px;
         }
 
         h3, p {

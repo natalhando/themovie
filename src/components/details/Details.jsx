@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.scss'
 
-import image from './../../assets/placeholder.jpg'
 import Header from './../header/Header'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { StarFilled } from '@ant-design/icons'
@@ -52,65 +51,59 @@ export default class Details extends React.Component {
                     title="Detalhes"
                     icon="info"
                 />
-                {
-                    this.state.movieData ? (
-                    <div className="card-body">
-                        <img
-                            src={`https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}`}
-                            alt="Movie cover details"
-                        />
-                        <Scrollbars
-                            className="card-content"
-                            style={{ height: 160 }}
-                        >
-                            <h3>{ this.state.movieData.title }</h3>
-                            <p>
-                                <span><StarFilled/></span>
-                                { this.state.movieData.vote_average }
-                            </p>
-                            <p>
-                                { this.state.movieData.overview }
-                            </p>
-                            {
-                                this.state.cast.length > 0 && (
-                                    <p>
-                                        Elenco: {
-                                            this.state.cast.map((person, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="cast-name"
-                                                >
-                                                    { person.name };{" "}
-                                                </span>
-                                            ))
-                                        }
-                                    </p>
-                                )
-                            }
-                            
-                            {
-                                this.state.crew.length > 0 && (
-                                    <p>
-                                        Produção: {
-                                            this.state.crew.map((person, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="cast-name"
-                                                >
-                                                    { person.name };{" "}
-                                                </span>
-                                            ))
-                                        }
-                                    </p>
-                                )
-                            }
-                            
-                        </Scrollbars>
-                    </div>
-                    ) : (
-                        <p>Não deu né</p>
-                    )
-                }
+                <div className="card-body">
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}`}
+                        alt="Movie cover details"
+                    />
+                    <Scrollbars
+                        className="card-content"
+                        style={{ height: 160 }}
+                    >
+                        <h3>{ this.state.movieData.title }</h3>
+                        <p>
+                            <span><StarFilled/></span>
+                            { this.state.movieData.vote_average }
+                        </p>
+                        <p className="text">
+                            { this.state.movieData.overview }
+                        </p>
+                        {
+                            this.state.cast.length > 0 && (
+                                <p className="text">
+                                    <span>Elenco:</span> {
+                                        this.state.cast.map((person, index) => (
+                                            <span
+                                                key={index}
+                                                className="cast-name"
+                                            >
+                                                { person.name };{" "}
+                                            </span>
+                                        ))
+                                    }
+                                </p>
+                            )
+                        }
+                        
+                        {
+                            this.state.crew.length > 0 && (
+                                <p className="text">
+                                    <span>Produção:</span> {
+                                        this.state.crew.map((person, index) => (
+                                            <span
+                                                key={index}
+                                                className="cast-name"
+                                            >
+                                                { person.name };{" "}
+                                            </span>
+                                        ))
+                                    }
+                                </p>
+                            )
+                        }
+                        
+                    </Scrollbars>
+                </div>
                 
             </div>
         );

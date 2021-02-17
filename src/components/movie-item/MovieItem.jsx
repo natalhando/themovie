@@ -22,6 +22,7 @@ function MovieItem({
                 <div className="tags">
                     {
                         genres.map((tag, index) => (
+                            index <= 5 &&
                             <div className="tag" key={index}>
                                 <p>{ tag }</p>
                             </div>

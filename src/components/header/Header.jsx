@@ -18,7 +18,6 @@ function Header({title, icon}) {
                 })()}
                 <h2>{title}</h2>
             </div>
-            <p>ver mais</p>
         </div>
     );
 }

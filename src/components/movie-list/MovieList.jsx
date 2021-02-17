@@ -10,17 +10,11 @@ class MovieList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            movies: [],
+            movies: props.movies,
             genres: [],
             movie: 761053
         }
         this.loadGenres()
-    }
-
-    async componentDidMount() {
-        this.setState({
-            movies: (await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.results
-        })
     }
 
     async loadGenres() {
@@ -47,9 +41,9 @@ class MovieList extends React.Component {
     
         return (
             <div className="MovieList">
-                <Scrollbars style={{ height: 430 }}>
+                <Scrollbars style={{ height: 420, renderTrackHorizontal: false }}>
                     {
-                        this.state.movies.map(
+                        this.props.movies.map(
                             (item, index) => (
                                 <MovieItem
                                     place={index + 1}

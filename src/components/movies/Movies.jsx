@@ -16,6 +16,7 @@ function Movies(props) {
             />
             <MovieList
                 updateMovie={updateMovie}
+                movies={props.movies}
             />
         </div>
     );

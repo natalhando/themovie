@@ -4,8 +4,9 @@
 }
 
 .Details {
-    width: 30vw;
-    height: 35vh;
+    margin: 0 0 10px 10px;
+    width: 450px;
+    height: 245px;
 
     background: rgba(255, 255, 255, 0.1);
     box-shadow: inset -2px -2px 2px rgba(48, 41, 47, 0.25), inset 2px 2px 2px rgba(255, 255, 255, 0.1);
@@ -14,19 +15,24 @@
 
     .card-body {
         display: flex;
-        padding: 0 10px;
+        padding: 0 20px;
 
         .card-content {
             margin-left: 10px;
+            height: 180px !important;
 
             h3, p, .cast-name {
                 font-family: 'Montserrat Light', sans-serif;
                 font-weight: 100;
                 color: #FFFFFF;
+                padding-bottom: 10px;
+                line-height: 20px;
             }
 
             h3 { font-size: 14px }
-            p { font-size: 12px }
+            .text {
+                font-size: 12px;
+            }
 
             span {
                 padding-right: 2px;
