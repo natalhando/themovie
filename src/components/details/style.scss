@@ -19,7 +19,7 @@
         .card-content {
             margin-left: 10px;
 
-            h3, p {
+            h3, p, .cast-name {
                 font-family: 'Montserrat Light', sans-serif;
                 font-weight: 100;
                 color: #FFFFFF;
@@ -27,6 +27,14 @@
 
             h3 { font-size: 14px }
             p { font-size: 12px }
+
+            span {
+                padding-right: 2px;
+            }
+
+            .cast-name {
+                font-weight: 100;
+            }
 
         }
 

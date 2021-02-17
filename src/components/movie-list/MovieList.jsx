@@ -7,13 +7,14 @@ import axios from 'axios'
 
 class MovieList extends React.Component {
     
-
     constructor(props) {
         super(props)
         this.state = {
             movies: [],
-            genres: []
+            genres: [],
+            movie: 761053
         }
+        this.loadGenres()
     }
 
     async componentDidMount() {
@@ -23,11 +24,23 @@ class MovieList extends React.Component {
     }
 
     async loadGenres() {
-        let rawGenres = (await axios.get(`themoviedb.org/3/genre/movie/list?language=pt-BR&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.results
-
-        rawGenres.genres.map(item => {
-            // this.state.genres.push({ item.id: item.name })
+        this.setState({
+            genres: (await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=pt-BR&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.genres
         })
+    }
+
+    getGenre = (ids) =>  {
+        let genres = []
+        for (let id of ids) {
+            genres.push(
+                this.state.genres.filter(item => item.id === id)[0].name
+            )
+        }
+        return genres
+    }
+
+    updateMovie = (movie) => {
+        this.props.updateMovie(movie)
     }
 
     render() {
@@ -37,12 +50,15 @@ class MovieList extends React.Component {
                 <Scrollbars style={{ height: 430 }}>
                     {
                         this.state.movies.map(
-                            (item, index) => true && (
+                            (item, index) => (
                                 <MovieItem
                                     place={index + 1}
                                     title={item.title}
                                     rate={item.vote_average}
-                                    tag="Romance"
+                                    genres={this.getGenre(item.genre_ids)}
+                                    id={item.id}
+                                    key={index}
+                                    updateMovie={this.updateMovie}
                                 />
                             )
                         )

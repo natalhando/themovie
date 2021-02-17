@@ -4,20 +4,36 @@ import './style.scss'
 import Movies from './../movies/Movies'
 import Details from './../details/Details'
 import Dashboard from './../dashboard/Dashboard'
-import { Row, Col } from 'antd';
 
-function Panel() {
-    return (
-        <div className="Panel">
+export class Panel extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.detailsElement = React.createRef()
+    }
+
+    updateMovie = (movie) => {
+        this.detailsElement.current.updateMovie(movie)
+    }
+
+    render() {
+        return (
+            <div className="Panel">
                 <div className="column">
-                    <Movies/>
+                    <Movies
+                        updateMovie={this.updateMovie}
+                    />
                 </div>
                 <div className="column">
-                    <Details/>
+                    <Details
+                        ref={this.detailsElement}
+                        movie={761053}
+                    />
                     <Dashboard/>
                 </div>
-        </div>
-    );
+            </div>
+        );     
+    }
+ 
 }
 
-export default Panel;

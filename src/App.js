@@ -1,5 +1,5 @@
 import './App.scss';
-import Panel from './components/panel/Panel';
+import { Panel } from './components/panel/Panel';
 
 function App() {
   return (

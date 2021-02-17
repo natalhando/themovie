@@ -4,6 +4,7 @@
 }
 
 .MovieItem {
+    cursor: pointer;
     background: #3F4045;
     height: 80px;
     padding: 5px;
@@ -20,18 +21,20 @@
         padding: 0 10px;
 
         .tags {
+            display: flex;
             margin-top: 10px;
         }
 
         .tag {
             width: fit-content;
             padding: 0 10px;
+            margin-right: 5px;
             background: #30292F;
             border-radius: 20px;
 
             p {
                 font-family: 'Montserrat Light', sans-serif;
-                font-size: 12px;
+                font-size: 10px;
                 color: #FFFFFF;
             }
         }
@@ -54,6 +57,10 @@
             font-weight: 100;
             font-size: 12px;
             color: #FFFFFF;
+        }
+
+        span {
+            padding: 0 2px;
         }
     }
 
