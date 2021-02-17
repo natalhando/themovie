@@ -6,6 +6,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { StarFilled } from '@ant-design/icons'
 import axios from 'axios'
 import Rating from '@material-ui/lab/Rating';
+import Snackbar from '@material-ui/core/Snackbar'
 
 export default class Details extends React.Component {
 
@@ -17,7 +18,8 @@ export default class Details extends React.Component {
             cast: [],
             crew: [],
             rate: 2.5,
-            sessionId: props.sessionId
+            sessionId: props.sessionId,
+            snackbarOpen: false
         }
 
     }
@@ -35,29 +37,54 @@ export default class Details extends React.Component {
     }
 
     async updateMovieInfo(id) {
-        this.setState({
-            movieData: (await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data
-        }, function () {
-            this.getCast(this.state.movie)
-        }) 
+        try {
+            this.setState({
+                movieData: (await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data
+            }, function () {
+                this.getCast(this.state.movie)
+            }) 
+        } catch(_) {
+            this.setState({
+                snackbarOpen: true
+            })
+        } 
     }
 
     async getCast(id) {
-        let data = (await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data
-        this.setState({
-            cast: data.cast.slice(0, 5),
-            crew: data.crew.filter(person => person.department === "Production")
-        })
+        try {
+            let data = (await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data
+            this.setState({
+                cast: data.cast.slice(0, 5),
+                crew: data.crew.filter(person => person.department === "Production")
+            })
+        } catch(_) {
+            this.setState({
+                snackbarOpen: true
+            })
+        } 
     }
 
     async handleRate (value) {
-        this.setState({
-            rate: value
-        })
+        try {
+            this.setState({
+                rate: value
+            })
 
-        await axios.post(`https://api.themoviedb.org/3/movie/${this.state.movie}/rating?api_key=${process.env.REACT_APP_API_KEY_TMDB}&guest_session_id=${this.state.sessionId}`, {
-            value: 10
-        }).then((response) => console.log(response))
+            await axios.post(`https://api.themoviedb.org/3/movie/${this.state.movie}/rating?api_key=${process.env.REACT_APP_API_KEY_TMDB}&guest_session_id=${this.state.sessionId}`, {
+                value: 10
+            })
+
+        } catch(_) {
+            this.setState({
+                snackbarOpen: true
+            })
+        } 
+    }
+
+    handleCloseSnackbar() {
+        this.setState({
+            snackbarOpen: false
+        })
     }
 
     render() {
@@ -131,7 +158,16 @@ export default class Details extends React.Component {
                         
                     </Scrollbars>
                 </div>
-                
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleCloseSnackbar}
+                    message="Verifique sua conexão, por favor"
+                />                
             </div>
         );
     }

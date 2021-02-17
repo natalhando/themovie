@@ -2,8 +2,7 @@ import React from 'react';
 import './style.scss'
 
 import Header from './../header/Header'
-import { VictoryChart, VictoryBar, VictoryPie } from "victory";
-import { PieChart, Pie } from 'recharts'
+import { VictoryChart, VictoryBar } from "victory"
 
 export default class Dashboard extends React.Component {
 

@@ -4,6 +4,7 @@ import './style.scss'
 import MovieItem from './../movie-item/MovieItem'
 import { Scrollbars } from 'react-custom-scrollbars'
 import axios from 'axios'
+import Snackbar from '@material-ui/core/Snackbar'
 
 class MovieList extends React.Component {
     
@@ -12,7 +13,8 @@ class MovieList extends React.Component {
         this.state = {
             movies: props.movies,
             genres: [],
-            movie: 761053
+            movie: 761053,
+            snackbarOpen: false
         }
     }
 
@@ -20,10 +22,22 @@ class MovieList extends React.Component {
         this.loadGenres()
     }
 
-    async loadGenres() {
+    handleCloseSnackbar() {
         this.setState({
-            genres: (await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=pt-BR&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.genres
+            snackbarOpen: false
         })
+    }
+
+    async loadGenres() {
+        try {
+            this.setState({
+                genres: (await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=pt-BR&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.genres
+            })
+        } catch(_) {
+            this.setState({
+                snackbarOpen: true
+            })
+        } 
     }
 
     getGenre = (ids) =>  {
@@ -61,6 +75,16 @@ class MovieList extends React.Component {
                         )
                     }
                 </Scrollbars>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleCloseSnackbar}
+                    message="Verifique sua conexão, por favor"
+                />
             </div>
         );
     }
