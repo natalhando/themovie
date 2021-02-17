@@ -10,7 +10,6 @@ import Rating from '@material-ui/lab/Rating';
 export default class Details extends React.Component {
 
     constructor(props) {
-        console.log("Construindoo")
         super(props)
         this.state = {
             movie: props.movie,
@@ -18,7 +17,6 @@ export default class Details extends React.Component {
             cast: [],
             crew: [],
             rate: 2.5,
-            rated: false,
             sessionId: props.sessionId
         }
 
@@ -26,7 +24,6 @@ export default class Details extends React.Component {
 
     componentDidMount() {
         this.updateMovieInfo(this.state.movie)
-        console.log(this.state.rate)
     }
 
     updateMovie = (id) => {
@@ -55,8 +52,7 @@ export default class Details extends React.Component {
 
     async handleRate (value) {
         this.setState({
-            rate: value,
-            rated: true
+            rate: value
         })
 
         await axios.post(`https://api.themoviedb.org/3/movie/${this.state.movie}/rating?api_key=${process.env.REACT_APP_API_KEY_TMDB}&guest_session_id=${this.state.sessionId}`, {
@@ -93,7 +89,6 @@ export default class Details extends React.Component {
                             defaultValue={this.state.rate}
                             max={10}
                             onChange={(_, value) => this.handleRate(value)}
-                            disabled={this.state.rated}
                         />
 
 

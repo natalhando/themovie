@@ -38,9 +38,9 @@ export default class Dashboard extends React.Component {
         }
         let array = props.movies.map(item => item.genre_ids)
         let flatArray = [].concat.apply([], array);
-        let generosId = this.numberOfOccurrences(flatArray)
-        generosId[0] = generosId[0].map((item) => this.genres[item])
-        this.getData(generosId)
+        let genresData = this.numberOfOccurrences(flatArray)
+        genresData[0] = genresData[0].map((item) => this.genres[item])
+        this.getData(genresData)
     }
 
     numberOfOccurrences = (array) => {

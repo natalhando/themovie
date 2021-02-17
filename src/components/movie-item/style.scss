@@ -8,6 +8,7 @@
     background: rgba(63, 64, 69, 0.5);
     border-bottom: 2px solid rgb(40, 41, 44);
     height: 80px;
+    width: 100%;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -42,6 +43,7 @@
     }
 
     .card-header {
+        width: 420px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -50,7 +52,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 380px;
+            width: 375px;
         }
 
         h3, p {
@@ -63,7 +65,18 @@
         span {
             padding: 0 2px;
         }
-    }
+    }    
+}
 
+@media screen and (max-width: 600px) {
     
+    .card-header div {
+        width: 280px;
+
+        h3 {
+            width: 250px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 }
