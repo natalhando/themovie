@@ -5,19 +5,28 @@ import Header from './../header/Header'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { StarFilled } from '@ant-design/icons'
 import axios from 'axios'
+import Rating from '@material-ui/lab/Rating';
 
 export default class Details extends React.Component {
 
     constructor(props) {
+        console.log("Construindoo")
         super(props)
         this.state = {
             movie: props.movie,
             movieData: {},
             cast: [],
-            crew: []
+            crew: [],
+            rate: 2.5,
+            rated: false,
+            sessionId: props.sessionId
         }
-        this.updateMovieInfo(this.state.movie)
 
+    }
+
+    componentDidMount() {
+        this.updateMovieInfo(this.state.movie)
+        console.log(this.state.rate)
     }
 
     updateMovie = (id) => {
@@ -44,6 +53,17 @@ export default class Details extends React.Component {
         })
     }
 
+    async handleRate (value) {
+        this.setState({
+            rate: value,
+            rated: true
+        })
+
+        await axios.post(`https://api.themoviedb.org/3/movie/${this.state.movie}/rating?api_key=${process.env.REACT_APP_API_KEY_TMDB}&guest_session_id=${this.state.sessionId}`, {
+            value: 10
+        }).then((response) => console.log(response))
+    }
+
     render() {
         return (
             <div className="Details">
@@ -65,6 +85,18 @@ export default class Details extends React.Component {
                             <span><StarFilled/></span>
                             { this.state.movieData.vote_average }
                         </p>
+                        <p className="text">Deixe sua avaliação</p>
+                        <Rating
+                            name="customized-10"
+                            precision={0.5}
+                            size="small"
+                            defaultValue={this.state.rate}
+                            max={10}
+                            onChange={(_, value) => this.handleRate(value)}
+                            disabled={this.state.rated}
+                        />
+
+
                         <p className="text">
                             { this.state.movieData.overview }
                         </p>

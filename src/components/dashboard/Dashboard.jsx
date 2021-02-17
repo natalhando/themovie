@@ -38,11 +38,8 @@ export default class Dashboard extends React.Component {
         }
         let array = props.movies.map(item => item.genre_ids)
         let flatArray = [].concat.apply([], array);
-        console.log('flatArray')
-        console.log(flatArray)
         let generosId = this.numberOfOccurrences(flatArray)
         generosId[0] = generosId[0].map((item) => this.genres[item])
-        //console.log(generosId[0])
         this.getData(generosId)
     }
 
@@ -73,8 +70,6 @@ export default class Dashboard extends React.Component {
                 y: (array[1])[i]
             })
         }
-        console.log('data')
-        console.log(data)
 
         this.data = data.sort((a, b) => (a.y > b.y) ? 1 : -1)
     }

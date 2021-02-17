@@ -14,6 +14,9 @@ class MovieList extends React.Component {
             genres: [],
             movie: 761053
         }
+    }
+
+    componentDidMount() {
         this.loadGenres()
     }
 
