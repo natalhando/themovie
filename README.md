@@ -2,6 +2,8 @@
 
 Esse projeto foi criado para uma etapa da seleção da KPMG.
 
+![Prévia do projeto](https://github.com/natalhando/themovie/blob/main/src/assets/preview.png)
+
 ## Scripts Disponíveis
 
 No diretório do projeto, você pode rodar o comando
