@@ -3,6 +3,7 @@ import './style.scss'
 
 import Header from './../header/Header'
 import { VictoryChart, VictoryBar } from "victory"
+import axios from 'axios'
 
 export default class Dashboard extends React.Component {
 
@@ -28,15 +29,39 @@ export default class Dashboard extends React.Component {
         "37": "Faroeste"
     }
 
-    data = []
-
     constructor(props) {
         super(props)
         this.state = {
-            showingMostPopular: true
+            showingMostPopular: true,
+            movies: [],
+            data: []
         }
-        let array = props.movies.map(item => item.genre_ids)
-        let flatArray = [].concat.apply([], array);
+        this.loadData()
+    }
+    
+    async loadData() {
+        try {
+            this.setState({
+                movies: (await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.results
+            })
+        
+
+            for (let i = 2; i <= 5; i++) {
+                this.setState({
+                    movies: this.state.movies.concat((await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=${i}&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data.results)
+                })
+            }
+            this.loadGenres()
+        } catch(_) {
+            this.setState({
+                snackbarOpen: true
+            })
+        } 
+    }
+
+    loadGenres() {
+        let array = this.state.movies.map(item => item.genre_ids)
+        let flatArray = [].concat.apply([], array)
         let genresData = this.numberOfOccurrences(flatArray)
         genresData[0] = genresData[0].map((item) => this.genres[item])
         this.getData(genresData)
@@ -69,8 +94,11 @@ export default class Dashboard extends React.Component {
                 y: (array[1])[i]
             })
         }
+        data = data.sort((a, b) => (a.y > b.y) ? 1 : -1)
 
-        this.data = data.sort((a, b) => (a.y > b.y) ? 1 : -1)
+        this.setState({
+            data: data
+        })
     }
 
     changeDashboard = () => {
@@ -80,6 +108,7 @@ export default class Dashboard extends React.Component {
     }
 
     render() {
+
         return (
             <div className="Dashboard">
                 <Header
@@ -96,7 +125,7 @@ export default class Dashboard extends React.Component {
                                 domainPadding={25}
                             >
                                 <VictoryBar 
-                                    data={this.data.slice(this.data.length - 1 - 5, this.data.length - 1)}
+                                    data={this.state.data.slice(this.state.data.length - 1 - 5, this.state.data.length - 1)}
                                     barRatio={1}
                                     animate={{
                                         duration: 2000,
@@ -112,7 +141,7 @@ export default class Dashboard extends React.Component {
                                 domainPadding={25}
                             >
                                 <VictoryBar 
-                                    data={this.data.slice(0, 5)}
+                                    data={this.state.data.slice(0, 5)}
                                     barRatio={1}
                                     animate={{
                                         duration: 2000,
@@ -126,7 +155,7 @@ export default class Dashboard extends React.Component {
                         )
                     }
                     <p
-                        onClick={this.changeDashboard}
+                        onClick={this.changeDashboard.bind(this)}
                     >Ver { this.state.showingMostPopular ? 'menos' : 'mais'} populares</p>   
                     </div>
                 </div>

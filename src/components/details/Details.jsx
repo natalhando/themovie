@@ -21,6 +21,7 @@ export default class Details extends React.Component {
             sessionId: props.sessionId,
             snackbarOpen: false
         }
+        this.handleRate = this.handleRate.bind(this)
 
     }
 
@@ -31,7 +32,7 @@ export default class Details extends React.Component {
     updateMovie = (id) => {
         this.setState({
             movie: id
-        }, function () {
+        }, () => {
             this.updateMovieInfo(this.state.movie)
         })
     }
@@ -40,7 +41,7 @@ export default class Details extends React.Component {
         try {
             this.setState({
                 movieData: (await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=pt-BR&page=1&api_key=${process.env.REACT_APP_API_KEY_TMDB}`)).data
-            }, function () {
+            }, () => {
                 this.getCast(this.state.movie)
             }) 
         } catch(_) {
