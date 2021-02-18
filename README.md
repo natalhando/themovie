@@ -1,6 +1,6 @@
 # TheMovie, por Natalia Pinheiro
 
-Esse projeto foi criado para uma etapa da seleção da KPMG [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto foi criado para uma etapa da seleção da KPMG.
 
 ## Scripts Disponíveis
 
