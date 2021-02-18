@@ -165,7 +165,7 @@ export default class Details extends React.Component {
                         horizontal: 'center',
                     }}
                     open={this.state.snackbarOpen}
-                    autoHideDuration={2000}
+                    autoHideDuration={6000}
                     onClose={this.handleCloseSnackbar}
                     message="Verifique sua conexão, por favor"
                 />                
