@@ -10,15 +10,18 @@ No diretório do projeto, você pode rodar o comando
 
 ### `yarn start`
 
-para executar o modo de desenvolvimento.\
+Para executar o modo de desenvolvimento.\
 Ele vai abrir o [http://localhost:3000](http://localhost:3000) para que você possa ver o projeto no seu navegador.
 
 ### `yarn build`
 
-para construir o app para produção dentro da pasta `build`.
+Para construir o app para produção dentro da pasta `build`.
 
 ## Vá direto ao ponto
 
 Você pode visualizar esse projeto acessando o [TheMovie Natalia](https://themovienataliapinheiro.netlify.app/).
+
+## Créditos
+Os dados de filmes que você encontra aqui foram retirados da [API da TMDB](https://developers.themoviedb.org/)
 
 ## Obrigada pela atenção!
