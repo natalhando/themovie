@@ -13,7 +13,7 @@ Ele vai abrir o [http://localhost:3000](http://localhost:3000) para que você po
 
 ### `yarn build`
 
-para construir o app para produção dentro da pasta `build`.\
+para construir o app para produção dentro da pasta `build`.
 
 ## Vá direto ao ponto
 
